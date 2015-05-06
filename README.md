@@ -3,6 +3,7 @@
 An immutable thunk optimization for [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
 
 [![Build Status](https://api.travis-ci.org/kuraga/vnode-immutable-thunk.svg?branch=master)](https://travis-ci.org/kuraga/vnode-immutable-thunk)
+[![npm version](https://badge.fury.io/js/vnode-immutable-thunk.svg)](http://badge.fury.io/js/vnode-immutable-thunk)
 
 ## Installation
 
