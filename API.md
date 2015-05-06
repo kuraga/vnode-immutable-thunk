@@ -49,8 +49,8 @@ Will be given to `renderFn` function.
 proto: Object | null
 ```
 
-Every property of `proto` is set in `immutableThunk`.
-It is neccessary if you want to set [`vnode`'s `key` argument](https://github.com/Matt-Esch/virtual-dom/blob/master/docs/vnode.md#arguments).
+Every property of `proto` is set up in `immutableThunk`.
+It is neccessary if you want to set [`VNode`'s `key` argument](https://github.com/Matt-Esch/virtual-dom/blob/master/docs/vnode.md#arguments).
 Value `null` will be treated as `undefined` (default value).
 
 Default: `{}`.
