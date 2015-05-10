@@ -273,36 +273,36 @@ test('rerender if the equalStates is false', function (assert) {
     assert.end();
 });
 
-test('custom equalRenders can be used', function (assert) {
+test('custom equalRenderers can be used', function (assert) {
     var initial = { favorite: 'cats' };
     var proto = {};
     var render = function (state) {
     };
     var equalStates = null;
-    var equalRenders = function (currentStates, previousStates) {
-        equalRendersCount++;
+    var equalRenderers = function (currentStates, previousStates) {
+        equalRenderersCount++;
 
         return true;
     };
 
     var previousThunk = immutableThunk(render, initial);
-    var currentThunk = immutableThunk(render, initial, proto, equalStates, equalRenders);
+    var currentThunk = immutableThunk(render, initial, proto, equalStates, equalRenderers);
 
-    var equalRendersCount = 0;
+    var equalRenderersCount = 0;
     currentThunk.render(previousThunk);
-    assert.equal(equalRendersCount, 1);
+    assert.equal(equalRenderersCount, 1);
 
     assert.end();
 });
 
-test('the equalRenders is invoked with correct arguments', function (assert) {
+test('the equalRenderers is invoked with correct arguments', function (assert) {
     var initial = { favorite: 'cats' };
     var update = { favorite: 'dogs' };
     var proto = {};
     var render = function (state) {
     };
     var equalStates = null;
-    var equalRenders = function (currentStates, previousStates) {
+    var equalRenderers = function (currentStates, previousStates) {
         assert.strictEqual(currentStates.favorite, update.favorite);
         assert.strictEqual(previousStates.favorite, initial.favorite);
 
@@ -310,25 +310,25 @@ test('the equalRenders is invoked with correct arguments', function (assert) {
     };
 
     var previousThunk = immutableThunk(render, initial);
-    var currentThunk = immutableThunk(render, update, proto, equalStates, equalRenders);
+    var currentThunk = immutableThunk(render, update, proto, equalStates, equalRenderers);
 
     currentThunk.render(previousThunk);
 
     assert.end();
 });
 
-test('no rerender if the equalRenders returns true', function (assert) {
+test('no rerender if the equalRenderers returns true', function (assert) {
     var initial = {};
     var proto = {};
     var render = function (state) {
         renderCount++;
     };
     var equalStates = null;
-    var equalRenders = function (currentStates, previousStates) {
+    var equalRenderers = function (currentStates, previousStates) {
         return true;
     };
 
-    var thunk = immutableThunk(render, initial, proto, equalStates, equalRenders);
+    var thunk = immutableThunk(render, initial, proto, equalStates, equalRenderers);
     thunk.render();
 
     var renderCount = 0;
@@ -338,16 +338,16 @@ test('no rerender if the equalRenders returns true', function (assert) {
     assert.end();
 });
 
-test('no rerender if the equalRenders is true', function (assert) {
+test('no rerender if the equalRenderers is true', function (assert) {
     var initial = {};
     var proto = {};
     var render = function (state) {
         renderCount++;
     };
     var equalStates = null;
-    var equalRenders = true;
+    var equalRenderers = true;
 
-    var thunk = immutableThunk(render, initial, proto, equalStates, equalRenders);
+    var thunk = immutableThunk(render, initial, proto, equalStates, equalRenderers);
     thunk.render();
 
     var renderCount = 0;
@@ -357,17 +357,17 @@ test('no rerender if the equalRenders is true', function (assert) {
     assert.end();
 });
 
-test('rerender if the equalRenders returns false', function (assert) {
+test('rerender if the equalRenderers returns false', function (assert) {
     var initial = {};
     var proto = {};
     var render = function (state) {
         renderCount++;
     };
     var equalStates = null;
-    var equalRenders = function (currentStates, previousStates) {
+    var equalRenderers = function (currentStates, previousStates) {
         return false;
     };
-    var thunk = immutableThunk(render, initial, proto, equalStates, equalRenders);
+    var thunk = immutableThunk(render, initial, proto, equalStates, equalRenderers);
     thunk.render();
 
     var renderCount = 0;
@@ -377,15 +377,15 @@ test('rerender if the equalRenders returns false', function (assert) {
     assert.end();
 });
 
-test('rerender if the equalRenders is false', function (assert) {
+test('rerender if the equalRenderers is false', function (assert) {
     var initial = {};
     var proto = {};
     var render = function (state) {
         renderCount++;
     };
     var equalStates = null;
-    var equalRenders = false;
-    var thunk = immutableThunk(render, initial, proto, equalStates, equalRenders);
+    var equalRenderers = false;
+    var thunk = immutableThunk(render, initial, proto, equalStates, equalRenderers);
     thunk.render();
 
     var renderCount = 0;
@@ -546,20 +546,20 @@ test('no rerender if previous thunk state are current thunk state (render functi
     assert.end();
 });
 
-test('no rerender if previous thunk state are current thunk state (render functions are the same, equalStates is null, equalRenders is null)', function (assert) {
+test('no rerender if previous thunk state are current thunk state (render functions are the same, equalStates is null, equalRenderers is null)', function (assert) {
     var initial = { favorite: 'cats' };
     var proto = {};
     var render = function (state) {
         renderCount++;
     };
     var equalStates = null;
-    var equalRenders = null;
+    var equalRenderers = null;
 
     var previousThunk = immutableThunk(render, initial);
     previousThunk.render();
 
     var renderCount = 0;
-    var currentThunk = immutableThunk(render, initial, proto, equalStates, equalRenders);
+    var currentThunk = immutableThunk(render, initial, proto, equalStates, equalRenderers);
     currentThunk.render(previousThunk);
     assert.equal(renderCount, 0);
 
@@ -604,7 +604,7 @@ test('no rerender if previous thunk state is equal to current thunk state (rende
     assert.end();
 });
 
-test('no rerender if previous thunk state is equal to current thunk state (render functions are the same, equalStates is null, equalRenders is null)', function (assert) {
+test('no rerender if previous thunk state is equal to current thunk state (render functions are the same, equalStates is null, equalRenderers is null)', function (assert) {
     var initial = { favorite: 'cats', subitem: { favorite: 'dogs' } };
     var update = { favorite: 'cats', subitem: { favorite: 'dogs' } };
     var proto = {};
@@ -612,9 +612,9 @@ test('no rerender if previous thunk state is equal to current thunk state (rende
         renderCount++;
     };
     var equalStates = null;
-    var equalRenders = null;
+    var equalRenderers = null;
 
-    var previousThunk = immutableThunk(render, initial, equalRenders);
+    var previousThunk = immutableThunk(render, initial, equalRenderers);
     previousThunk.render();
 
     var renderCount = 0;
@@ -701,7 +701,7 @@ test('rerender if renders are different bindings of the same function', function
     assert.end();
 });
 
-test('rerender if renders are different functions (equalRenders is null)', function (assert) {
+test('rerender if renders are different functions (equalRenderers is null)', function (assert) {
     var initial = {};
     var proto = {};
     var render1 = function (state) {
@@ -710,20 +710,20 @@ test('rerender if renders are different functions (equalRenders is null)', funct
         render2Count++;
     };
     var equalStates = null;
-    var equalRenders = null;
+    var equalRenderers = null;
 
     var previousThunk = immutableThunk(render1);
     previousThunk.render();
 
     var render2Count = 0;
-    var currentThunk = immutableThunk(render2, initial, proto, equalStates, equalRenders);
+    var currentThunk = immutableThunk(render2, initial, proto, equalStates, equalRenderers);
     currentThunk.render(previousThunk);
     assert.equal(render2Count, 1);
 
     assert.end();
 });
 
-test('rerender if renders are different bindings of the same function (equalRenders is null)', function (assert) {
+test('rerender if renders are different bindings of the same function (equalRenderers is null)', function (assert) {
     var initial = {};
     var proto = {};
     var render = function (state) {
@@ -734,13 +734,13 @@ test('rerender if renders are different bindings of the same function (equalRend
     var bindedRender1 = render.bind(obj1);
     var bindedRender2 = render.bind(obj2);
     var equalStates = null;
-    var equalRenders = null;
+    var equalRenderers = null;
 
     var previousThunk = immutableThunk(bindedRender1);
     previousThunk.render();
 
     var renderCount = 0;
-    var currentThunk = immutableThunk(bindedRender2, initial, proto, equalStates, equalRenders);
+    var currentThunk = immutableThunk(bindedRender2, initial, proto, equalStates, equalRenderers);
     currentThunk.render(previousThunk);
     assert.equal(renderCount, 1);
 

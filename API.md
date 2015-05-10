@@ -16,13 +16,13 @@ Also consult [virtual-dom](https://github.com/Matt-Esch/virtual-dom).
 ## `ImmutableThunk`
 
 ```javascript
-var immutableThunk = ImmutableThunk(renderFn, state[, proto[, equalStates[, equalRenders]]]);
+var immutableThunk = ImmutableThunk(renderFn, state[, proto[, equalStates[, equalRenderers]]]);
 ```
 
 or
 
 ```javascript
-var immutableThunk = new ImmutableThunk(renderFn, state[, proto[, equalStates[, equalRenders]]]);
+var immutableThunk = new ImmutableThunk(renderFn, state[, proto[, equalStates[, equalRenderers]]]);
 ```
 
 Returns a [`Thunk`](https://github.com/Matt-Esch/virtual-dom/blob/master/docs/thunk.md) which render one time only

@@ -3,9 +3,9 @@
 var xtendMutable = require('xtend/mutable');
 var deepEqual = require('deep-equal');
 
-function ImmutableThunk(renderFn, state, proto, equalStates, equalRenders) {
+function ImmutableThunk(renderFn, state, proto, equalStates, equalRenderers) {
     if (!(this instanceof ImmutableThunk)) {
-        return new ImmutableThunk(renderFn, state, proto, equalStates, equalRenders);
+        return new ImmutableThunk(renderFn, state, proto, equalStates, equalRenderers);
     }
 
     var _this = this;
@@ -30,14 +30,14 @@ function ImmutableThunk(renderFn, state, proto, equalStates, equalRenders) {
         this.equalStates = equalStates;
     }
 
-    if (equalRenders === undefined || equalRenders === null) {
-        this.equalRenders = defaultEqualRenders;
-    } else if (equalRenders === true) {
-        this.equalRenders = justTrue;
-    } else if (equalRenders === false) {
-        this.equalRenders = justFalse;
+    if (equalRenderers === undefined || equalRenderers === null) {
+        this.equalRenderers = defaultEqualRenders;
+    } else if (equalRenderers === true) {
+        this.equalRenderers = justTrue;
+    } else if (equalRenderers === false) {
+        this.equalRenderers = justFalse;
     } else {
-        this.equalRenders = equalRenders;
+        this.equalRenderers = equalRenderers;
     }
 }
 
@@ -72,7 +72,7 @@ function shouldUpdate(current, previous) {
        || previous === undefined || previous === null
        || previous.type !== 'Thunk'
        || !current.equalStates(current.state, previous.state)
-       || !current.equalRenders(current.renderFn, previous.renderFn);
+       || !current.equalRenderers(current.renderFn, previous.renderFn);
 }
 
 module.exports = ImmutableThunk;
