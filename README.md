@@ -7,7 +7,9 @@ An immutable thunk optimization for [virtual-dom](https://github.com/Matt-Esch/v
 
 ## Installation
 
-`npm install vnode-immutable-thunk`
+```sh
+npm install vnode-immutable-thunk
+```
 
 ## Example
 
