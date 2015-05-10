@@ -217,6 +217,24 @@ test('no rerender if the equalStates returns true', function (assert) {
     assert.end();
 });
 
+test('no rerender if the equalStates is true', function (assert) {
+    var initial = {};
+    var proto = {};
+    var render = function (state) {
+        renderCount++;
+    };
+    var equalStates = true;
+
+    var thunk = immutableThunk(render, initial, proto, equalStates);
+    thunk.render();
+
+    var renderCount = 0;
+    thunk.render(thunk);
+    assert.equal(renderCount, 0);
+
+    assert.end();
+});
+
 test('rerender if the equalStates returns false', function (assert) {
     var initial = {};
     var proto = {};
@@ -226,6 +244,24 @@ test('rerender if the equalStates returns false', function (assert) {
     var equalStates = function (currentStates, previousStates) {
         return false;
     };
+
+    var thunk = immutableThunk(render, initial, proto, equalStates);
+    thunk.render();
+
+    var renderCount = 0;
+    thunk.render(thunk);
+    assert.equal(renderCount, 1);
+
+    assert.end();
+});
+
+test('rerender if the equalStates is false', function (assert) {
+    var initial = {};
+    var proto = {};
+    var render = function (state) {
+        renderCount++;
+    };
+    var equalStates = false;
 
     var thunk = immutableThunk(render, initial, proto, equalStates);
     thunk.render();
@@ -326,6 +362,25 @@ test('no rerender if the equalRenders returns true', function (assert) {
     assert.end();
 });
 
+test('no rerender if the equalRenders is true', function (assert) {
+    var initial = {};
+    var proto = {};
+    var render = function (state) {
+        renderCount++;
+    };
+    var equalStates = null;
+    var equalRenders = true;
+
+    var thunk = immutableThunk(render, initial, proto, equalStates, equalRenders);
+    thunk.render();
+
+    var renderCount = 0;
+    thunk.render(thunk);
+    assert.equal(renderCount, 0);
+
+    assert.end();
+});
+
 test('rerender if the equalRenders returns false', function (assert) {
     var initial = {};
     var proto = {};
@@ -336,6 +391,24 @@ test('rerender if the equalRenders returns false', function (assert) {
     var equalRenders = function (currentStates, previousStates) {
         return false;
     };
+    var thunk = immutableThunk(render, initial, proto, equalStates, equalRenders);
+    thunk.render();
+
+    var renderCount = 0;
+    thunk.render(thunk);
+    assert.equal(renderCount, 1);
+
+    assert.end();
+});
+
+test('rerender if the equalRenders is false', function (assert) {
+    var initial = {};
+    var proto = {};
+    var render = function (state) {
+        renderCount++;
+    };
+    var equalStates = null;
+    var equalRenders = false;
     var thunk = immutableThunk(render, initial, proto, equalStates, equalRenders);
     thunk.render();
 

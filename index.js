@@ -17,9 +17,28 @@ function ImmutableThunk(renderFn, state, proto, equalStates, equalRenders) {
     xtendMutable(this, proto);
 
     this.renderFn = renderFn;
+
     this.state = state;
-    this.equalStates = equalStates !== undefined && equalStates !== null ? equalStates : defaultEqualStates;
-    this.equalRenders = equalRenders !== undefined && equalRenders !== null ? equalRenders : defaultEqualRenders;
+
+    if (equalStates === undefined || equalStates === null) {
+        this.equalStates = defaultEqualStates;
+    } else if (equalStates === true) {
+        this.equalStates = justTrue;
+    } else if (equalStates === false) {
+        this.equalStates = justFalse;
+    } else {
+        this.equalStates = equalStates;
+    }
+
+    if (equalRenders === undefined || equalRenders === null) {
+        this.equalRenders = defaultEqualRenders;
+    } else if (equalRenders === true) {
+        this.equalRenders = justTrue;
+    } else if (equalRenders === false) {
+        this.equalRenders = justFalse;
+    } else {
+        this.equalRenders = equalRenders;
+    }
 }
 
 ImmutableThunk.prototype.type = 'Thunk';
@@ -38,6 +57,14 @@ function defaultEqualStates(first, second) {
 
 function defaultEqualRenders(first, second) {
     return first === second;
+}
+
+function justTrue() {
+    return true;
+}
+
+function justFalse() {
+    return false;
 }
 
 function shouldUpdate(current, previous) {
