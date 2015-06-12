@@ -1,7 +1,13 @@
 language: node_js
 sudo: false
 node_js:
+<<<<<<< HEAD
 - '0.10'
 - '0.12'
 - 'iojs'
+=======
+  - '0.10'
+  - '0.12'
+  - 'iojs'
+>>>>>>> 16998279dbe3409f3f627ecb001046a5deb5a5dd
 script: npm run travis-test
