@@ -1,4 +1,5 @@
 'use strict';
+module.exports = ImmutableThunk;
 
 var xtendMutable = require('xtend/mutable');
 var deepEqual = require('deep-equal');
@@ -11,7 +12,7 @@ function ImmutableThunk(renderFn, state, proto, equalStates, equalRenderers) {
     var _this = this;
 
     var proto = proto !== undefined && proto !== null ? proto : {};
-    if (Object.prototype.toString.call(proto) !== '[object Object]') {
+    if (!utils.isObject(proto)) {
         throw new TypeError('proto must be an object');
     }
     xtendMutable(this, proto);
@@ -20,7 +21,7 @@ function ImmutableThunk(renderFn, state, proto, equalStates, equalRenderers) {
 
     this.state = state;
 
-    if (equalStates === undefined || equalStates === null) {
+    if (utils.isEmpty(equalStates)) {
         this.equalStates = defaultEqualStates;
     } else if (equalStates === true) {
         this.equalStates = justTrue;
@@ -30,7 +31,7 @@ function ImmutableThunk(renderFn, state, proto, equalStates, equalRenderers) {
         this.equalStates = equalStates;
     }
 
-    if (equalRenderers === undefined || equalRenderers === null) {
+    if (utils.isEmpty(equalRenderers)) {
         this.equalRenderers = defaultEqualRenders;
     } else if (equalRenderers === true) {
         this.equalRenderers = justTrue;
@@ -45,7 +46,7 @@ ImmutableThunk.prototype.type = 'Thunk';
 
 ImmutableThunk.prototype.render = function render(previous) {
     if (shouldUpdate(this, previous)) {
-        if( Object.prototype.toString.call( this.state ) === '[object Array]' ) {
+        if( utils.isArray(this.state) ) {
             return this.renderFn.apply(null, this.state);
         } else {
             return this.renderFn.call(null, this.state);
@@ -73,11 +74,21 @@ function justFalse() {
 }
 
 function shouldUpdate(current, previous) {
-   return current === undefined || current === null
-       || previous === undefined || previous === null
+   return utils.isEmpty(current)
+       || utils.isEmpty(previous)
        || previous.type !== 'Thunk'
        || !current.equalStates(current.state, previous.state)
        || !current.equalRenderers(current.renderFn, previous.renderFn);
 }
 
-module.exports = ImmutableThunk;
+var utils = {
+    isArray: function(obj) {
+        return Object.prototype.toString.call( obj ) === '[object Array]'
+    },
+    isObject: function(obj) {
+        return Object.prototype.toString.call( obj ) === '[object Object]'
+    },
+    isEmpty: function(obj) {
+        return obj === undefined || obj === null
+    }
+}
