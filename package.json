@@ -1,0 +1,55 @@
+{
+  "name": "vnode-immutable-thunk",
+  "version": "0.2.0",
+  "license": "MIT",
+  "homepage": "https://github.com/kuraga/vnode-immutable-thunk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kuraga/vnode-immutable-thunk.git"
+  },
+  "author": {
+    "name": "Alexander Kurakin",
+    "email": "kuraga333@mail.ru"
+  },
+  "bugs": {
+    "url": "https://github.com/kuraga/vnode-immutable-thunk/issues",
+    "email": "kuraga333@mail.ru"
+  },
+  "main": "index",
+  "dependencies": {
+    "xtend": "^4.0.0",
+    "deep-equal": "^1.0.0"
+  },
+  "devDependencies": {
+    "tape": "^4.0.0",
+    "istanbul": "^0.3.13"
+  },
+  "scripts": {
+    "test": "node ./test/index.js",
+    "cover": "istanbul cover --report html --print both ./test/index.js",
+    "travis-test": "istanbul cover --report none --print both ./test/index.js"
+  },
+  "gitHead": "b56ee46757e3c97d9421639512fb7720e0bc52b5",
+  "description": "An immutable thunk optimization for [virtual-dom](https://github.com/Matt-Esch/virtual-dom).",
+  "_id": "vnode-immutable-thunk@0.2.0",
+  "_shasum": "48c6f5ca6230208687185bfda2adbaebaad022a2",
+  "_from": "vnode-immutable-thunk@>=0.2.0 <0.3.0",
+  "_npmVersion": "2.7.4",
+  "_nodeVersion": "0.12.2",
+  "_npmUser": {
+    "name": "kuraga",
+    "email": "kuraga333@mail.ru"
+  },
+  "maintainers": [
+    {
+      "name": "kuraga",
+      "email": "kuraga333@mail.ru"
+    }
+  ],
+  "dist": {
+    "shasum": "48c6f5ca6230208687185bfda2adbaebaad022a2",
+    "tarball": "http://registry.npmjs.org/vnode-immutable-thunk/-/vnode-immutable-thunk-0.2.0.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/vnode-immutable-thunk/-/vnode-immutable-thunk-0.2.0.tgz"
+}
