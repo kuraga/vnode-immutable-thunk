@@ -22,10 +22,25 @@ test('render is invoked', function (assert) {
     assert.end();
 });
 
-test('render is invoked with correct arguments', function (assert) {
+test('render is invoked with correct argument as object', function (assert) {
     var initial = { favorite: 'dogs' };
     var render = function (state) {
         assert.equal(state, initial);
+    };
+
+    var thunk = immutableThunk(render, initial);
+    thunk.render();
+
+    assert.end();
+});
+
+test('render is invoked with correct list of arguments', function (assert) {
+    var initial = [1, {foo: 'bar'}, false];
+    var render = function () {
+        assert.equal(arguments.length, initial.length)
+        for(var i = 0; i<arguments.length; i++) {
+            assert.equal(arguments[i], initial[i])
+        }
     };
 
     var thunk = immutableThunk(render, initial);
