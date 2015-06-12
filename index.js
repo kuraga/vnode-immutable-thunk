@@ -45,7 +45,12 @@ ImmutableThunk.prototype.type = 'Thunk';
 
 ImmutableThunk.prototype.render = function render(previous) {
     if (shouldUpdate(this, previous)) {
-        return this.renderFn.apply(null, this.state);
+        if( Object.prototype.toString.call( this.state ) === '[object Array]' ) {
+            return this.renderFn.apply(null, this.state);
+        } else {
+            return this.renderFn.call(null, this.state);
+        }
+
     } else {
         return previous.vnode;
     }

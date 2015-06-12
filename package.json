@@ -24,6 +24,12 @@
     "tape": "^4.0.0",
     "istanbul": "^0.3.13"
   },
+
+  "scripts": {
+    "test": "node ./test/index.js",
+    "cover": "istanbul cover --report html --print both ./test/index.js",
+    "travis-test": "istanbul cover --report none --print both ./test/index.js"
+  },
   "gitHead": "b56ee46757e3c97d9421639512fb7720e0bc52b5",
   "description": "An immutable thunk optimization for [virtual-dom](https://github.com/Matt-Esch/virtual-dom).",
   "_id": "vnode-immutable-thunk@0.2.0",
@@ -46,11 +52,6 @@
     "tarball": "http://registry.npmjs.org/vnode-immutable-thunk/-/vnode-immutable-thunk-0.2.0.tgz"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/vnode-immutable-thunk/-/vnode-immutable-thunk-0.2.0.tgz",
-  "scripts": {
-    "test": "node ./test/index.js",
-    "cover": "./node_modules/.bin/istanbul cover --report html --print both ./test/index.js",
-    "travis-test": "./node_modules/.bin/istanbul cover --report none --print both ./test/index.js"
-  }
+  "_resolved": "https://registry.npmjs.org/vnode-immutable-thunk/-/vnode-immutable-thunk-0.2.0.tgz"
 
 }
